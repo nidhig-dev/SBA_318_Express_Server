@@ -5,27 +5,39 @@
     <meta charset="UTF-8">
     <title>
         Welcome to your library!
+
     </title>
     <link rel="stylesheet" href="/styles.css" />
 </head>
 
 <body>
-    <a href="/">back</a>
+    <%if (role=='admin'){%>
+        <a href='/admin?name=<%=name%>&role=<%=role%>'>back</a>
+    <%} else{%>    
+        <a href="/">back</a>
+        <%}%>
     <h1>
-        <% if(name){%>
-            Welcome to your library, <%= name %>!
-                <%}
-            else{%>
-            Welcome to your library! 
-            <%}%>
+            Welcome to your library!                
     </h1>
-    <h3>Books available to checkout today!</h3>
+    <h3>
+        <%if (name){%>
+            <%=role.toUpperCase()%>:
+                <%=name.toUpperCase()%>
+                    <%} else{%>
+                        Books available to checkout today!
+                        <%}%>
+    </h3>
 
     <ul>
         <% books.forEach(book=>{ %>
             <div class="book">
                 <img class="book-cover" src="<%= book.cover %>" alt="<%= book.title %>">
                 <div class="book-details">
+                    <% if(role=='admin'){%>
+                        <h2>
+                            <%= book.number %>
+                        </h2>
+                        <%}%>
                     <h2>
                         <%= book.title %>
                     </h2>

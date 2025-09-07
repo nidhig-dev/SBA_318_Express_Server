@@ -8,15 +8,20 @@ router.route("/")
 
     //@route GET(/)
     //@desc-displays a form to enter library number
-    //@access:public and admin
+    //@access:public
     .get((req, res) => {
         res.render("libNum")
     })
+
+    //@route POST(/)
+    //@desc-gets the library from the text box in HTML form
+    //@access:public
+
     .post((req,res,next)=>{
         //get library number from the HTML form
         let libraryNum=parseInt(req.body.libraryNum);
         console.log(libraryNum);
-        if(libraryNum!=Number){
+        if(isNaN(libraryNum)){
             const err = new Error("Invalid Library Number!");
             err.status = 422;
             next(err);
@@ -27,12 +32,13 @@ router.route("/")
             //if user is a admin
             if(user.role=="admin"){
 
-                res.render("admin",{name:user.name,role:user.role});
+                return res.redirect(`/admin?name=${user.name}&role=${user.role}`);
             }
             //if user is a regular user
             else{
-                console.log("I am a user");
-               res.redirect(`/books?name=${user.name}`);
+                console.log("I am a user",user.name);
+               return res.redirect(`/books/user?name=${user.name}&role=${user.role}`);
+              //  return res.redirect("/books/user");
             }
 
         } 

@@ -1,7 +1,9 @@
 //Imports
 import express from "express";
-import booksRoute from "./routes/booksRoute.mjs"
-import userRoute from "./routes/userRoute.mjs"
+import booksAdminRoute from "./routes/booksAdminRoute.mjs";
+import booksUserRoute from "./routes/booksUserRoute.mjs";
+import userRoute from "./routes/userRoute.mjs";
+import adminRoute from "./routes/adminRoute.mjs";
 
 //env set up
 const app= express();
@@ -18,8 +20,10 @@ app.set("views","./views");
 
 //routes
 
-app.use("/books",booksRoute);
+app.use("/books/user",booksUserRoute);
+app.use("/books/admin",booksAdminRoute);
 app.use("/",userRoute);
+app.use("/admin",adminRoute)
 
 //global error handling
 

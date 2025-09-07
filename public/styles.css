@@ -1,5 +1,8 @@
-body{
+body,::after,::before{
     background-color: rgba(95, 158, 160, 0.493);
+    box-sizing: border-box;
+    padding:0px;
+    margin:0px;
 }
 h1,
 h3 {
@@ -32,7 +35,19 @@ a{
     padding-top: 100px;
         display: flex;
         justify-content: center;
+        gap:20px;
         font-size: larger;
+}
+.postBook{
+    display: flex;
+    /* Stack fields vertically inside each form */
+        flex-direction: column;
+        /* Space between input fields */
+        align-items: end;
+        gap: 10px;        
+        padding: 15px;
+        min-width: 250px;
+        
 }
 .libNumText {
     width: 200px;
