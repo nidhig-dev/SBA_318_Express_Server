@@ -7,42 +7,74 @@ const router = express.Router();
 
 router.route("/")
 
-    //@route .get(/books)
+    //@route GET(/books)
     //@desc-gets all the books in library
-    //@access:public
+    //@access:public and admin
     .get((req, res) => {
         res.json(books);
 
     });
 
-router.route("/:id")
-    //@route .get(/books/:id)
-    //id=book id
+router.route("/user/id/:id")
+    //@route GET(/books/user/id/:id)
+    //id= number matching book id
     //@desc-gets one book in library based on book id
-    //@access:public
-    
-    .get((req, res) => {
+    //@access:public and admin
 
+    .get((req, res,next) => {
+        const number=req.params.id;
+        let book=books.find((book)=>book.number==number);
+        if(book){
+            res.json(book);
+
+        }else{
+            const err = new Error("No Book found!");
+            err.status = 404;
+            next(err);
+        }
+        
+    });
+
+//@route .get(/books/user/name/:name)
+//name= string  
+//@desc-gets all books in library whose title begins with 'name'
+//@access:public
+
+router.route("/user/name/:name")
+    .get((req, res, next) => {
+        let name = req.params.name.toLowerCase();
+        let newBookArr = [];
+        newBookArr = books.filter((book) => book.title.toLowerCase().startsWith(name));
+        if (newBookArr.length > 0) {
+            res.json(newBookArr);
+        } else {
+            const err = new Error("No Book found!");
+            err.status = 404;
+            next(err);
+        }
     })
 
-    //@route .post(/books/:id)
+router.route("/admin/:id")
+
+    //@route .post(/books/admin/:id)
     //id=admin id
     //@desc-creates new book entry in library if user is admin
     //@access:admin
 
-    .post((req, res,next) => {
+    .post((req, res, next) => {
         //const number=req.body["number"];
+        console.log(req.params.id);
         if (req.params.id == 1) {
             const { title, releaseDate, description, pages, cover, copies } = req.body;
             //chk if all the data is entered by the admin
             if (title && releaseDate && description && pages && cover && copies) {
                 //chk if title exists
-                if(books.find((book)=>book.title==title)){
-                    res.status(409).json({msg:"This Book already exists in the database."})
+                if (books.find((book) => book.title == title)) {
+                    res.status(409).json({ msg: "This Book already exists in the database." })
                     return;
                 }
-                let book={
-                    number: books.length+1,
+                let book = {
+                    number: books.length + 1,
                     title,
                     releaseDate,
                     description,
@@ -57,7 +89,7 @@ router.route("/:id")
                 const err = new Error("Insufficient Book Data");
                 err.status = 422;
                 next(err);
-            }            
+            }
         } else {
             console.log(`id is ${req.params.id}`);
             const err = new Error("Only admin can create a new data entry");
@@ -67,18 +99,22 @@ router.route("/:id")
 
     })
 
-    //@route .patch(/books/:id)
+    //@route .patch(/books/admin/:id/book/:id)
+    //first id is admin id and second id is book id
     //@desc-update a book entry in library
     //@access:admin
 
     .patch((req, res) => {
 
     })
-    //@route .delete(/books/:id)
+    //@route .delete(/books/admin/:id/book/:id)
+    //first id is admin id and second id is book id
     //@desc-delete a book entry from library based on book id
     //@access:admin
 
     .delete((req, res) => {
 
     });
+
+
 export default router;
