@@ -6,7 +6,6 @@ export const books = [
         "description": "On his birthday, Harry Potter discovers that he is the son of two well-known wizards, from whom he has inherited magical powers. He must attend a famous school of magic and sorcery, where he establishes a friendship with two young men who will become his companions on his adventure. During his first year at Hogwarts, he discovers that a malevolent and powerful wizard named Voldemort is in search of a philosopher's stone that prolongs the life of its owner.",
         "pages": 223,
         "cover": "https://m.media-amazon.com/images/I/81DI+BAN2SL._SY425_.jpg",
-        "copies": 10
     },
     {
         "number": 2,
@@ -15,7 +14,6 @@ export const books = [
         "description": "Harry Potter and the sophomores investigate a malevolent threat to their Hogwarts classmates, a menacing beast that hides within the castle.",
         "pages": 251,
         "cover": "https://m.media-amazon.com/images/I/915KEvGiX-L.jpg",
-        "copies": 10
     },
     {
         "number": 3,
@@ -24,7 +22,6 @@ export const books = [
         "description": "Harry's third year of studies at Hogwarts is threatened by Sirius Black's escape from Azkaban prison. Apparently, it is a dangerous wizard who was an accomplice of Lord Voldemort and who will try to take revenge on Harry Potter.",
         "pages": 317,
         "cover": "https://m.media-amazon.com/images/I/A1D9WdGRYzL._SY425_.jpg",
-        "copies": 10
     },
     {
         "number": 4,
@@ -33,7 +30,6 @@ export const books = [
         "description": "Hogwarts prepares for the Triwizard Tournament, in which three schools of wizardry will compete. To everyone's surprise, Harry Potter is chosen to participate in the competition, in which he must fight dragons, enter the water and face his greatest fears.",
         "pages": 636,
         "cover": "https://m.media-amazon.com/images/I/51vOPzoNd-L._SY445_SX342_ControlCacheEqualizer_.jpg",
-        "copies": 10
     },
     {
         "number": 5,
@@ -42,7 +38,6 @@ export const books = [
         "description": "In his fifth year at Hogwarts, Harry discovers that many members of the wizarding community do not know the truth about his encounter with Lord Voldemort. Cornelius Fudge, Minister of Magic, appoints Dolores Umbridge as Defense Against the Dark Arts teacher because he believes that Professor Dumbledore plans to take over his job. But his teachings are inadequate, so Harry prepares the students to defend the school against evil.",
         "pages": 766,
         "cover": "https://m.media-amazon.com/images/I/81Budsu1XBL.jpg",
-        "copies": 10
     },
     {
         "number": 6,
@@ -51,7 +46,6 @@ export const books = [
         "description": "Harry discovers a powerful book and, while trying to discover its origins, collaborates with Dumbledore in the search for a series of magical objects that will aid in the destruction of Lord Voldemort.",
         "pages": 607,
         "cover": "https://m.media-amazon.com/images/I/61sXBXmAWML._SY425_.jpg",
-        "copies": 10
     },
     {
         "number": 7,
@@ -60,7 +54,6 @@ export const books = [
         "description": "Harry, Ron and Hermione go on a dangerous mission to locate and destroy the secret of Voldemort's immortality and destruction - the Horcruces. Alone, without the guidance of their teachers or the protection of Professor Dumbledore, the three friends must lean on each other more than ever. But there are Dark Forces in between that threaten to tear them apart. Harry Potter is getting closer and closer to the task for which he has been preparing since the first day he set foot in Hogwarts: the last battle with Voldemort.",
         "pages": 607,
         "cover": "https://m.media-amazon.com/images/I/91VsRHjTY-L._SY425_.jpg",
-        "copies": 10
     },
     {
         "number": 8,
@@ -69,7 +62,6 @@ export const books = [
         "description": "Harry's second son entered Hogwarts, but in Slytherin. His relationship with Harry is getting worse and he became close friends with Draco's son, Scorpius Malfoy who is said to be Lord Voldemort's son.",
         "pages": 336,
         "cover": "https://m.media-amazon.com/images/I/51QOSDY70UL._SY445_SX342_ControlCacheEqualizer_.jpg",
-        "copies": 10
     },
     {
         "number": 9,
@@ -77,8 +69,7 @@ export const books = [
         "releaseDate": "Mar 1, 2001",
         "description": "Newt Scamander travels the world to find and document magical creatures. This book is a guide to magical creatures of the wizarding world.",
         "pages": 128,
-        "cover": "https://m.media-amazon.com/images/I/51fK8sQj2zL._SY344_BO1,204,203,200_.jpg",
-        "copies": 10
+        "cover": "https://m.media-amazon.com/images/I/91jlpfDiD9L._SY342_.jpg",
     },
     {
         "number": 10,
@@ -87,7 +78,6 @@ export const books = [
         "description": "Bilbo Baggins, a hobbit, is swept into a quest to reclaim the lost Dwarf Kingdom of Erebor from the fearsome dragon Smaug.",
         "pages": 310,
         "cover": "https://m.media-amazon.com/images/I/91b0C2YNSrL.jpg",
-        "copies": 10
     },
     {
         "number": 11,
@@ -96,7 +86,6 @@ export const books = [
         "description": "Frodo Baggins begins a quest to destroy the One Ring, facing dangers from Sauron's forces while forming the Fellowship of the Ring.",
         "pages": 423,
         "cover": "https://m.media-amazon.com/images/I/91SZSW8qSsL.jpg",
-        "copies": 10
     },
     {
         "number": 12,
@@ -104,8 +93,8 @@ export const books = [
         "releaseDate": "Nov 11, 1954",
         "description": "The second part of the epic journey where Frodo and Sam continue towards Mordor, while Aragorn, Legolas, and Gimli defend Middle-Earth from Sauron's allies.",
         "pages": 352,
-        "cover": "https://m.media-amazon.com/images/I/91b0C2YNSrL.jpg",
-        "copies": 10
+        "cover": "https://m.media-amazon.com/images/I/41Lr-35uz8L._SY445_SX342_ControlCacheEqualizer_.jpg",
+        
     },
     {
         "number": 13,
@@ -113,17 +102,16 @@ export const books = [
         "releaseDate": "Oct 20, 1955",
         "description": "The final battle for Middle-Earth ensues. Frodo and Sam struggle to destroy the One Ring, while Aragorn claims his rightful throne as King of Gondor.",
         "pages": 416,
-        "cover": "https://m.media-amazon.com/images/I/91y1K0yK3qL.jpg",
-        "copies": 10
-    },
+        "cover": "https://m.media-amazon.com/images/I/71tDovoHA+L._SY425_.jpg",
+           },
     {
         "number": 14,
         "title": "Percy Jackson & the Olympians: The Lightning Thief",
         "releaseDate": "Jun 28, 2005",
         "description": "Percy Jackson discovers he is a demigod and embarks on a journey to prevent a war among Greek gods while uncovering secrets about his past.",
         "pages": 377,
-        "cover": "https://m.media-amazon.com/images/I/51v5ZpFyaFL._SX331_BO1,204,203,200_.jpg",
-        "copies": 10
+        "cover": "https://m.media-amazon.com/images/I/51LdV0opNvL._SY445_SX342_ControlCacheEqualizer_.jpg",
+        
     },
     {
         "number": 15,
@@ -131,8 +119,8 @@ export const books = [
         "releaseDate": "Apr 1, 2006",
         "description": "Percy Jackson must venture into the Sea of Monsters to retrieve the Golden Fleece to save his summer camp and friends from impending danger.",
         "pages": 279,
-        "cover": "https://m.media-amazon.com/images/I/51kt+8+KQKL._SX331_BO1,204,203,200_.jpg",
-        "copies": 10
+        "cover": "https://m.media-amazon.com/images/I/516i14qMwUL._SY445_SX342_ControlCacheEqualizer_.jpg",
+        
     }
 
 

@@ -1,0 +1,56 @@
+body{
+    background-color: rgba(95, 158, 160, 0.493);
+}
+h1,
+h3 {
+    text-align: center;
+}
+a{
+    padding-left:50px;
+    font-size: large;    
+}
+.book {
+    display: flex;
+}
+
+.book-cover {
+    margin: 10px;
+    max-width: 120px;
+    height: auto;
+}
+
+.book-details {
+    margin: 10px;
+}
+
+.libNum {
+    padding-top: 100px;
+    text-align: center;
+    font-size: larger;
+}
+.admin{
+    padding-top: 100px;
+        display: flex;
+        justify-content: center;
+        font-size: larger;
+}
+.libNumText {
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    margin:5px 15px 5px 15px;
+}
+
+.libNumBtn {
+    border-radius: 5px;
+    width: 60px;
+    height: 35px;
+    background-color: rgba(128, 128, 128, 0.508);
+}
+.adminBtn{
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    margin-right:45px;
+    background-color: rgba(128, 128, 128, 0.508);
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Welcome to your library!
+    </title>
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+   
+    <a href="/">back</a>
+    <h1>Admin Page</h1>
+    <h3>
+        <% if(name){%>
+            Welcome to your library, <%= name %>!
+                <%} else{%>
+                    Welcome to your library!
+                    <%}%>
+    </h3>
+    <!-- <h3>You are an admin. what would you like to do?</h3> -->
+    <div class="admin">
+        <form  action="/books" method="GET">
+            <input type="submit" name="allBook" class="adminBtn" value="Book inventory" />
+        </form>
+        <form  action="/" method="GET"></form>
+            <input type="submit" name="addBook" class="adminBtn" value="Add a book" />
+        </form>
+        <form  action="/" method="GET"></form>
+            <input type="submit" name="delBook" class="adminBtn" value="Delete a book" />
+        </form>
+        <form  action="/" method="GET"></form>
+            <input type="submit" name="updateBook" class="adminBtn" value="Update a book" />
+        </form>
+    </div>
+</body>
+
+</html>

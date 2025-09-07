@@ -4,15 +4,21 @@ import { books } from "../data/books.mjs";
 //env set up
 const router = express.Router();
 
-
 router.route("/")
 
     //@route GET(/books)
     //@desc-gets all the books in library
     //@access:public and admin
     .get((req, res) => {
-        res.json(books);
-
+        //to display the name of the user who wants to display books
+        let name=req.query["name"];
+        if(name){
+            res.render("books", { name:name,books });
+        }else{    
+        //  res.json(books);
+       // res.render("user")
+        res.render("books", { name:null,books });
+    }
     });
 
 router.route("/user/id/:id")
@@ -21,18 +27,18 @@ router.route("/user/id/:id")
     //@desc-gets one book in library based on book id
     //@access:public and admin
 
-    .get((req, res,next) => {
-        const number=req.params.id;
-        let book=books.find((book)=>book.number==number);
-        if(book){
+    .get((req, res, next) => {
+        const number = req.params.id;
+        let book = books.find((book) => book.number == number);
+        if (book) {
             res.json(book);
 
-        }else{
+        } else {
             const err = new Error("No Book found!");
             err.status = 404;
             next(err);
         }
-        
+
     });
 
 //@route .get(/books/user/name/:name)
@@ -65,9 +71,9 @@ router.route("/admin/:id")
         //const number=req.body["number"];
         console.log(req.params.id);
         if (req.params.id == 1) {
-            const { title, releaseDate, description, pages, cover, copies } = req.body;
+            const { title, releaseDate, description, pages, cover } = req.body;
             //chk if all the data is entered by the admin
-            if (title && releaseDate && description && pages && cover && copies) {
+            if (title && releaseDate && description && pages && cover) {
                 //chk if title exists
                 if (books.find((book) => book.title == title)) {
                     res.status(409).json({ msg: "This Book already exists in the database." })
@@ -79,8 +85,7 @@ router.route("/admin/:id")
                     releaseDate,
                     description,
                     pages,
-                    cover,
-                    copies
+                    cover
                 }
                 books.push(book);
                 res.json(books);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Welcome to your library!
+    </title>
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+    <a href="/">back</a>
+    <h1>
+        <% if(name){%>
+            Welcome to your library, <%= name %>!
+                <%}
+            else{%>
+            Welcome to your library! 
+            <%}%>
+    </h1>
+    <h3>Books available to checkout today!</h3>
+
+    <ul>
+        <% books.forEach(book=>{ %>
+            <div class="book">
+                <img class="book-cover" src="<%= book.cover %>" alt="<%= book.title %>">
+                <div class="book-details">
+                    <h2>
+                        <%= book.title %>
+                    </h2>
+                    <p><strong>Release Date:</strong>
+                        <%= book.releaseDate %>
+                    </p>
+                    <p><strong>Pages:</strong>
+                        <%= book.pages %>
+                    </p>
+                    <p>
+                        <%= book.description %>
+                    </p>
+                </div>
+            </div>
+            <% }) %>
+    </ul>
+</body>
+
+</html>
