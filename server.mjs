@@ -25,7 +25,7 @@ app.set("views","./views");
 
 app.use("/books/user",booksUserRoute);
 app.use("/books/admin",booksAdminRoute);
-app.use("/admin/borrow",borrowBookRoute);
+app.use("/borrow",borrowBookRoute);
 app.use("/",userRoute);
 app.use("/admin",adminRoute)
 

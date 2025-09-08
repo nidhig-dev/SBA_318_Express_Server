@@ -10,8 +10,7 @@ router.route("/")
     //@desc-gets all the books in library
     //@access:public
     .get((req, res) => {
-        //  const backUrl = req.get("Referer") || "/"; // fallback to home if no referer
-        //to display the name (set in userRoute.mjs) of the user who wants to display books
+        //to display the name dynamically on books.ejs of the user who wants to see all the books (set in userRoute.mjs)
         let name = req.query["name"];
         let role = req.query["role"];
         
@@ -25,7 +24,7 @@ router.route("/")
             return res.render("books", { name: null, role: role, books });
         }
         else {
-            //When url is typed without query parameters name and role passed to it through thunderclient/postman
+            //When url is typed without query parameters 'name' and 'role' passed to it through thunderclient/postman
             return res.render("books", { name: null, role: null, books });           
         }
     });

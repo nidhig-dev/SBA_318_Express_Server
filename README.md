@@ -5,6 +5,10 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 
 ---
 ## How to Test
+
+### Assumption
+number,BookId,loadId are unique and cannot be updated in patch request.
+
 **With Thunderclient/Postman**
 GET method: `http://localhost:3000/books/admin`-Get all books
 Query Parameter: role:admin
@@ -62,8 +66,48 @@ Query parameter: role:admin
 
 - **userRoute** is used by template view engine only to redirect the user based on userId/Library Number.
 - **adminRoute** is used only by admin requests to render admin page
-- **booksUserRoute**
-- **borrowBookRoute**
+- **booksUserRoute** User gets routed to this route. He only has read access.
+- GET
+- GET by id,name
+- **borrowBookRoute** only Admin has access to all methods - GET
+Query parmeter: role:admin
+- GET by userId
+Query paramter:role:admin
+- GET by bookId
+Query paramter:role:admin
+
+- POST
+Query parameter: role:admin
+    Sample data-
+`{
+    "userId": 2,
+    "bookId": 7,
+    "borrowDate": "2025-08-25",
+    "dueDate": "2025-09-09",
+    "returnDate": null
+  }`
+
+- PATCH
+Query parameter: role:admin
+    Sample data-
+`{
+    "userId": 2,
+    "bookId": 7,
+    "borrowDate": "2025-08-25",
+    "dueDate": "2025-09-09",
+    "returnDate": null
+  }`
+
+- DELETE
+Query parameter: role:admin
+    Sample data-
+`{
+    "userId": 2,
+    "bookId": 7,
+    "borrowDate": "2025-08-25",
+    "dueDate": "2025-09-09",
+    "returnDate": null
+  }`
 
 ## 🚀 Features
 
