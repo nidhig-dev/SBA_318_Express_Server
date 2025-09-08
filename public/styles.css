@@ -8,6 +8,10 @@ h1,
 h3 {
     text-align: center;
 }
+p,h2{
+    margin-top:5px;
+    margin-bottom:5px;
+}
 a{
     padding-left:50px;
     font-size: large;    
@@ -19,6 +23,8 @@ a{
 .book-cover {
     margin: 10px;
     max-width: 120px;
+    min-width:120px;
+    max-height:150px;
     height: auto;
 }
 

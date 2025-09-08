@@ -5,7 +5,7 @@ export const books = [
         "releaseDate": "Jun 26, 1997",
         "description": "On his birthday, Harry Potter discovers that he is the son of two well-known wizards, from whom he has inherited magical powers. He must attend a famous school of magic and sorcery, where he establishes a friendship with two young men who will become his companions on his adventure. During his first year at Hogwarts, he discovers that a malevolent and powerful wizard named Voldemort is in search of a philosopher's stone that prolongs the life of its owner.",
         "pages": 223,
-        "cover": "https://m.media-amazon.com/images/I/81DI+BAN2SL._SY425_.jpg",
+        "cover": "https://m.media-amazon.com/images/I/5152XTq24+L._SY445_SX342_ControlCacheEqualizer_.jpg",
     },
     {
         "number": 2,
@@ -13,7 +13,7 @@ export const books = [
         "releaseDate": "Jul 2, 1998",
         "description": "Harry Potter and the sophomores investigate a malevolent threat to their Hogwarts classmates, a menacing beast that hides within the castle.",
         "pages": 251,
-        "cover": "https://m.media-amazon.com/images/I/915KEvGiX-L.jpg",
+        "cover": "https://m.media-amazon.com/images/I/51n-RPrkgSL._SY445_SX342_ControlCacheEqualizer_.jpg",
     },
     {
         "number": 3,
@@ -37,7 +37,7 @@ export const books = [
         "releaseDate": "Jun 21, 2003",
         "description": "In his fifth year at Hogwarts, Harry discovers that many members of the wizarding community do not know the truth about his encounter with Lord Voldemort. Cornelius Fudge, Minister of Magic, appoints Dolores Umbridge as Defense Against the Dark Arts teacher because he believes that Professor Dumbledore plans to take over his job. But his teachings are inadequate, so Harry prepares the students to defend the school against evil.",
         "pages": 766,
-        "cover": "https://m.media-amazon.com/images/I/81Budsu1XBL.jpg",
+        "cover": "https://m.media-amazon.com/images/I/51utpmmDotL._SY445_SX342_ControlCacheEqualizer_.jpg",
     },
     {
         "number": 6,
@@ -45,7 +45,7 @@ export const books = [
         "releaseDate": "Jul 16, 2005",
         "description": "Harry discovers a powerful book and, while trying to discover its origins, collaborates with Dumbledore in the search for a series of magical objects that will aid in the destruction of Lord Voldemort.",
         "pages": 607,
-        "cover": "https://m.media-amazon.com/images/I/61sXBXmAWML._SY425_.jpg",
+        "cover": "https://m.media-amazon.com/images/I/511rM3Mkz9L._SY445_SX342_ControlCacheEqualizer_.jpg",
     },
     {
         "number": 7,
@@ -61,7 +61,7 @@ export const books = [
         "releaseDate": "Jul 30, 2016",
         "description": "Harry's second son entered Hogwarts, but in Slytherin. His relationship with Harry is getting worse and he became close friends with Draco's son, Scorpius Malfoy who is said to be Lord Voldemort's son.",
         "pages": 336,
-        "cover": "https://m.media-amazon.com/images/I/51QOSDY70UL._SY445_SX342_ControlCacheEqualizer_.jpg",
+        "cover": "https://m.media-amazon.com/images/I/91bUfxdDjWL._AC_UY327_FMwebp_QL65_.jpg",
     },
     {
         "number": 9,
@@ -69,7 +69,7 @@ export const books = [
         "releaseDate": "Mar 1, 2001",
         "description": "Newt Scamander travels the world to find and document magical creatures. This book is a guide to magical creatures of the wizarding world.",
         "pages": 128,
-        "cover": "https://m.media-amazon.com/images/I/91jlpfDiD9L._SY342_.jpg",
+        "cover":"https://m.media-amazon.com/images/I/A1nR6LZWasL._AC_UY327_FMwebp_QL65_.jpg",
     },
     {
         "number": 10,

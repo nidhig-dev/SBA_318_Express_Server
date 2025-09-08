@@ -16,24 +16,13 @@ router.route("/")
         //get the query parameter either from thunderclient/postman or from userRoute.mjs for admin validation
         let name = req.query["name"];
         let role = req.query["role"];
-        if (name && role) {
-            if (role == "admin") {
+
+        if (role == "admin") {
+            if (name) {
                 return res.render("books", { name: name, role: role, books });
             }
             else {
-                const err = new Error("Permission Denied");
-                err.status = 403;
-                next(err);
-            }
-        }
-        else if (role) {
-            if (role == "admin") {
                 return res.render("books", { name: null, role: role, books });
-            }
-            else {
-                const err = new Error("Permission Denied");
-                err.status = 403;
-                next(err);
             }
         }
         else {
@@ -41,8 +30,7 @@ router.route("/")
             const err = new Error("Permission Denied");
             err.status = 403;
             next(err);
-        }
-
+            }        
     })
 
     //@route POST(/books/admin)
@@ -51,19 +39,18 @@ router.route("/")
     //@Note: If entering data through thunderclient or postman, this method expects object in body to have 'role:admin' to access this route
     //@Note: optional: If you enter name:any name in body, then template view shows your name
     //Example data: 
-    //{
+    // {
     // "role": "admin",
-    // "title": "another new book",
-    // "releaseDate": "Jun 26, 1997",
-    // "description": "New book on post method",
-    // "pages": 223,
-    // "cover": "https://m.media-amazon.com/images/I/81DI+BAN2SL._SY425_.jpg"
-    //}
+    // "title": "The Class",
+    // "releaseDate": "Jan 1, 1986",
+    // "description": "A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.",
+    // "pages": 560,
+    // "cover": "https://m.media-amazon.com/images/I/51rIay3vijL.jpg"
+    // }
 
     .post((req, res, next) => {
         const { name, role, title, releaseDate, description, pages, cover } = req.body;
         if (role == "admin") {
-
             //chk if all the data is entered by the admin
             if (title && releaseDate && description && pages && cover) {
                 //chk if title exists
@@ -104,8 +91,6 @@ router.route("/")
 
 
 router.route("/:id")
-
-
     //@route PATCH(/books/admin/:id)
     // id is book id
     //@desc-update a book entry in library based on book id

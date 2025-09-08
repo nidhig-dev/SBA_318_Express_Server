@@ -6,22 +6,64 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 ---
 ## How to Test
 **With Thunderclient/Postman**
+GET method: `http://localhost:3000/books/admin`-Get all books
+Query Parameter: role:admin
+
+POST method:`http://localhost:3000/books/admin`-Add a book
+Body:needs a property role with value admin.
+`{
+     "role": "admin",
+     "title": "The Class",
+     "releaseDate": "Jan 1, 1986",
+     "description": "A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.",
+     "pages": 560,
+     "cover": "https://m.media-amazon.com/images/I/51rIay3vijL.jpg"
+    }`
+PATCH method:`http://localhost:3000/books/admin/:id`-Update a book using book id
+Query parameter: role:admin
+{
+     "role": "admin",
+     "title": "The Class",
+     "releaseDate": "Jan 1, 1986",
+     "description": "A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.",
+     "pages": 560,
+     "cover": "https://m.media-amazon.com/images/I/51rIay3vijL.jpg"
+    }
+
+DELETE method:`http://localhost:3000/books/admin/:id`-Delete a book based on book id
+Query parameter: role:admin
+
 
 **With Template engine**
 - `http://localhost:3000/` renders login page (libNum.ejs) via userRoute.mjs. 
-- If you enter "1" you will be rendered Admin Page (admin.ejs).
-    - This page gives you access to see book inventory. The admin will also see **bookId**
+- Ids 2,3,4,5 are regular users and will take you to user books page.
+- If you enter "1" you will be rendered Admin Page (admin.ejs) via adminRoute.ejs.
+
+    - This page gives you access to see book inventory. The admin will also see **bookId** of a book.
     - Add/Create a new book entry using post method.
     ## Validation: 
-    - If book title (case insensitive)matches exactly with entered title
-    - If any field is empty
+    - If book title (case insensitive)matches exactly with entered title, it will throw error.
+    - If any field is empty, it will throw error.
+
     - Sample data of book entry:
 
+    * Title- The Class
+    * Release Date- Jan 1, 1986
+    * Description- A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.
+    * Pages- 560,
+    * Cover-https://m.media-amazon.com/images/I/51rIay3vijL.jpg
 
 
-- Other ids of user databse are regular users and will take you to books page.
-- booksAdminRoute is restricted to admins only. needs query parameters and body property `admin`.Best to check with template engine.
-- userRoute is used by template view engine only to redirect the user based on userId/Library Number.
+
+## Routes
+- **booksAdminRoute** is restricted to admins only.
+- GET/PATCH/DELETE method needs query parameter **role:admin** with thunderclient.Check with template engine to avoid this.
+- POST method needs body property **"role":"admin"** with thunderclient.Check with template engine to avoid this.
+
+- **userRoute** is used by template view engine only to redirect the user based on userId/Library Number.
+- **adminRoute** is used only by admin requests to render admin page
+- **booksUserRoute**
+- **borrowBookRoute**
 
 ## 🚀 Features
 
