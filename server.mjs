@@ -4,6 +4,8 @@ import booksAdminRoute from "./routes/booksAdminRoute.mjs";
 import booksUserRoute from "./routes/booksUserRoute.mjs";
 import userRoute from "./routes/userRoute.mjs";
 import adminRoute from "./routes/adminRoute.mjs";
+import borrowBookRoute from "./routes/borrowBookRoute.mjs";
+import morgan from "morgan"
 
 //env set up
 const app= express();
@@ -13,6 +15,7 @@ const PORT=3000;
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
+app.use(morgan('tiny'));
 
 //set EJS as template view engine
 app.set("view engine","ejs");
@@ -22,6 +25,7 @@ app.set("views","./views");
 
 app.use("/books/user",booksUserRoute);
 app.use("/books/admin",booksAdminRoute);
+app.use("/admin/borrow",borrowBookRoute);
 app.use("/",userRoute);
 app.use("/admin",adminRoute)
 

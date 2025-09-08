@@ -6,7 +6,6 @@ const router = express.Router();
 router.route("/")
 
     //@route GET(/books/admin)
-
     //@desc-gets book inventory in library 
     //@access:admin
 
@@ -32,8 +31,8 @@ router.route("/")
         //return res.render("admin",{books});
 
     })
-    //@route .post(/books/admin)
-    //id=admin id
+
+    //@route POST(/books/admin)    
     //@desc-creates new book entry in library if user is admin
     //@access:admin
 
@@ -76,21 +75,66 @@ router.route("/")
 router.route("/:id")
 
 
-    //@route .patch(/books/admin/:id/book/:id)
-    //first id is admin id and second id is book id
-    //@desc-update a book entry in library
+    //@route PATCH(/books/admin/:id)
+    // id is book id
+    //@desc-update a book entry in library based on book id
     //@access:admin
 
-    .patch((req, res) => {
-
+    .patch((req, res,next) => {
+        let id=req.params.id;
+        const { title, releaseDate, description, pages, cover } = req.body;
+        //chk if all the data is entered by the admin
+        
+            if (title && releaseDate && description && pages && cover) {
+                let index=books.findIndex((book) => book.number == id)
+                console.log(index)
+                //chk if title exists
+                if (index!=-1) {
+                    let book = {
+                        number:id,
+                        title,
+                        releaseDate,
+                        description,
+                        pages,
+                        cover
+                    }
+                    books.splice(index,1,book);   
+                    return res.json(books);                
+                   
+                }
+                else{
+                    const err = new Error("Book entry not found!");
+                    err.status = 404;
+                    next(err);
+                }               
+            }
+            else {
+                const err = new Error("Insufficient Book Data");
+                err.status = 422;
+                next(err);
+            }
     })
-    //@route .delete(/books/admin/:id/book/:id)
-    //first id is admin id and second id is book id
+    //@route DELETE(/books/admin/:id)
+    //id is book id
     //@desc-delete a book entry from library based on book id
     //@access:admin
 
-    .delete((req, res) => {
+    .delete((req, res,next) => {
+        let id = req.params.id;
+        //chk if all the data is entered by the admin
+            let index = books.findIndex((book) => book.number == id)
+            //chk if title exists
+            if (index!=-1) {
+                
+                books.splice(index, 1);
+                return res.json(books);
 
+            }
+            else {
+                const err = new Error("Book entry not found!");
+                err.status = 404;
+                next(err);
+            }
     });
 
 

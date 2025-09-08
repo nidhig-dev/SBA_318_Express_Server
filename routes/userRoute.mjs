@@ -1,6 +1,5 @@
 import express from "express";
 import {users} from "../data/users.mjs"
-import {books} from "../data/books.mjs"
 //env set up
 const router = express.Router();
 
@@ -14,7 +13,7 @@ router.route("/")
     })
 
     //@route POST(/)
-    //@desc-gets the library from the text box in HTML form
+    //@desc-gets the library number/userId from the text box in HTML form
     //@access:public
 
     .post((req,res,next)=>{
