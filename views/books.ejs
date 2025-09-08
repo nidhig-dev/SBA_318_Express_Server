@@ -33,7 +33,8 @@
             <div class="book">
                 <img class="book-cover" src="<%= book.cover %>" alt="<%= book.title %>">
                 <div class="book-details">
-                    <% if(role=='admin'){%>
+                    <% 
+                     if(role=='admin'){%>
                         <h2>
                             <%= book.number %>
                         </h2>

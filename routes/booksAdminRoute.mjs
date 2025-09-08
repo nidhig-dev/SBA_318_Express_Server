@@ -8,42 +8,66 @@ router.route("/")
     //@route GET(/books/admin)
     //@desc-gets book inventory in library 
     //@access:admin
+    //@Note: If entering data through thunderclient or postman, this method expects query parameter 'role:admin' to access this route
+    //@Note: optional: If you enter query parameter 'name:any name', then template view shows your name
 
-    .get((req, res) => {
 
-
-        //  const backUrl = req.get("Referer") || "/"; // fallback to home if no referer
-        //to display the name (set in userRoute.mjs) of the user who wants to display books
+    .get((req, res, next) => {
+        //get the query parameter either from thunderclient/postman or from userRoute.mjs for admin validation
         let name = req.query["name"];
         let role = req.query["role"];
-        console.log(name, role);
-        if (name) {
-            return res.render("books", { name: name, role: role, books });
-        } else {
-            //   res.json(books);
-            //res.render("user")
-            //When url is typed without name and role passed to it
-            return res.render("books", { name: null, role: null, books });
-            // return res.render("books", { books});
+        if (name && role) {
+            if (role == "admin") {
+                return res.render("books", { name: name, role: role, books });
+            }
+            else {
+                const err = new Error("Permission Denied");
+                err.status = 403;
+                next(err);
+            }
         }
-        //console.log(req.url);
-        //const backUrl = req.get("Referer") || "/"; // fallback to home if no referer
-        //return res.render("admin",{books});
+        else if (role) {
+            if (role == "admin") {
+                return res.render("books", { name: null, role: role, books });
+            }
+            else {
+                const err = new Error("Permission Denied");
+                err.status = 403;
+                next(err);
+            }
+        }
+        else {
+            //When url is typed without query parameter 'role' or role is not 'admin' passed to it through thunderclient/postman
+            const err = new Error("Permission Denied");
+            err.status = 403;
+            next(err);
+        }
 
     })
 
-    //@route POST(/books/admin)    
+    //@route POST(/books/admin)
     //@desc-creates new book entry in library if user is admin
     //@access:admin
-
+    //@Note: If entering data through thunderclient or postman, this method expects object in body to have 'role:admin' to access this route
+    //@Note: optional: If you enter name:any name in body, then template view shows your name
+    //Example data: 
+    //{
+    // "role": "admin",
+    // "title": "another new book",
+    // "releaseDate": "Jun 26, 1997",
+    // "description": "New book on post method",
+    // "pages": 223,
+    // "cover": "https://m.media-amazon.com/images/I/81DI+BAN2SL._SY425_.jpg"
+    //}
 
     .post((req, res, next) => {
-        const {name,role, title, releaseDate, description, pages, cover } = req.body;
-        if (name) {
+        const { name, role, title, releaseDate, description, pages, cover } = req.body;
+        if (role == "admin") {
+
             //chk if all the data is entered by the admin
             if (title && releaseDate && description && pages && cover) {
                 //chk if title exists
-                if (books.find((book) => book.title == title)) {
+                if (books.find((book) => book.title.toLowerCase() == title.toLowerCase())) {
                     res.status(409).json({ msg: "This Book already exists in the database." })
                     return;
                 }
@@ -57,18 +81,25 @@ router.route("/")
                 }
                 console.log(book);
                 books.push(book);
-                return res.render("books", { name: name, role: role, books });
-            } 
+                if (name) {
+                    return res.render("books", { name: name, role: role, books });
+                }
+                else {
+                    return res.render("books", { name: null, role: role, books });
+                }
+            }
             else {
                 const err = new Error("Insufficient Book Data");
                 err.status = 422;
                 next(err);
             }
-
-        } else {
-            return res.render("books", { name: null, role: null, books });        
         }
-
+        else {
+            //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
+            const err = new Error("Permission Denied");
+            err.status = 403;
+            next(err);
+        }
     });
 
 
@@ -79,62 +110,78 @@ router.route("/:id")
     // id is book id
     //@desc-update a book entry in library based on book id
     //@access:admin
+    //@Note: This method expects query parameter role:admin to access this route
 
-    .patch((req, res,next) => {
-        let id=req.params.id;
+    .patch((req, res, next) => {
+        let id = req.params.id;
+        let role = req.query["role"];
         const { title, releaseDate, description, pages, cover } = req.body;
         //chk if all the data is entered by the admin
-        
+        // Assumption:id is a unique identifier, is sequentially generated in post method,hence can't be edited to preserve the sequence.
+        if (role == "admin") {
             if (title && releaseDate && description && pages && cover) {
-                let index=books.findIndex((book) => book.number == id)
-                console.log(index)
-                //chk if title exists
-                if (index!=-1) {
+                let index = books.findIndex((book) => book.number == id)
+                //check if book id exists
+                if (index != -1) {
                     let book = {
-                        number:id,
+                        //keeping id same as before
+                        number: id,
                         title,
                         releaseDate,
                         description,
                         pages,
                         cover
                     }
-                    books.splice(index,1,book);   
-                    return res.json(books);                
-                   
+                    books.splice(index, 1, book);
+                    return res.json(books);
                 }
-                else{
+                else {
                     const err = new Error("Book entry not found!");
                     err.status = 404;
                     next(err);
-                }               
+                }
             }
             else {
                 const err = new Error("Insufficient Book Data");
                 err.status = 422;
                 next(err);
             }
+        }
+        else {
+            const err = new Error("Permission Denied");
+            err.status = 403;
+            next(err);
+        }
+
     })
     //@route DELETE(/books/admin/:id)
     //id is book id
     //@desc-delete a book entry from library based on book id
     //@access:admin
+    //@Note: This method expects query parameter role:admin to access this route
 
-    .delete((req, res,next) => {
+    .delete((req, res, next) => {
         let id = req.params.id;
-        //chk if all the data is entered by the admin
+        let role = req.query["role"];
+        if (role == "admin") {
+            //check i the book to be deleted by the admin, exists in database
             let index = books.findIndex((book) => book.number == id)
-            //chk if title exists
-            if (index!=-1) {
-                
+            //if book exists
+            if (index != -1) {
                 books.splice(index, 1);
                 return res.json(books);
-
             }
             else {
                 const err = new Error("Book entry not found!");
                 err.status = 404;
                 next(err);
             }
+        }
+        else {
+            const err = new Error("Permission Denied");
+            err.status = 403;
+            next(err);
+        }
     });
 
 
