@@ -49,9 +49,7 @@ router.route("/")
     // }
 
     .post((req, res, next) => {
-        console.log("hello")
         const { name, role, title, releaseDate, description, pages, cover } = req.body;
-        console.log("I am here",role);
         //  if (role == "admin") {
             //chk if all the data is entered by the admin
             if (title && releaseDate && description && pages && cover) {
@@ -68,7 +66,6 @@ router.route("/")
                     pages,
                     cover
                 }
-                console.log(book);
                 books.push(book);
                 if (name) {
                     return res.render("books", { name: name, role: role, books });

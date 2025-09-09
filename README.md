@@ -11,21 +11,21 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 | ------ | -------------------------- | ---------------------------------   |---------------------------- |
 | GET    | `/`                        | Login with library number/User Id   | None (Template View Engine) |
 | POST   | `/`                        | user/admin redirect                 | None (Template View Engine) |
-| GET    | `/books/user`              | Show available books to user        | None (Template View Engine) |
+| GET    | `/books/user`              | Show all books to user              | None (Template View Engine) |
 | GET    | `/books/user/id/:id`       | Get book details by **book Id**     | :Book Id                    |
 | GET    | `/books/user/name/:name`   |  Get books starting with **name**   | :name                       |   
 
 **Admin**
 | Method | Route                      | Description                  |Required route parameter                               |
 | ------ | -------------------------- | -----------------------------|------------------------------------------------------ |
-| GET    | `/books/admin`             | view books with id           | req.query parameter role:admin (  Template ViewEngine)|
+| GET    | `/books/admin`             | view all books               | req.query parameter role:admin (  Template ViewEngine)|
 | POST   | `/books/admin`             | Add a new book               | req.body object:"role":"admin"(Template View Engine)  |
 | PATCH  | `/books/admin/:id`         | Update book details          | req.query parameter role:admin                        |
 | DELETE | `/books/admin/:id`         | Delete a book                | req.query parameter role:admin                        |
 | GET    | `/admin/borrow`            | View all borrow records      | req.query parameter role:admin                        |
 | GET    | `/admin/borrow/bookid/:id` | Loan history of a book       | req.query parameter role:admin                        |
 | GET    | `/admin/borrow/userid/:id` | Loan history of a user       | req.query parameter role:admin                        |
-| POST   | `/admin/borrow`            | Create new loan record entry | req.query parameter role:admin                        |
+| POST   | `/admin/borrow`            | Create new loan record       | req.query parameter role:admin                        |
 | PATCH  | `/admin/borrow/:id`        | Update loan record           | req.query parameter role:admin                        |
 | DELETE | `/admin/borrow/:id`        | Delete loan record           | req.query parameter role:admin                        |
 
@@ -168,7 +168,7 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 ---
 ## REQUIREMENTS
 
-- Create and use at least two pieces of custom middleware.
+- ✅Create and use at least two pieces of custom middleware.
 - ✅Create and use error-handling middleware.
 - ✅Use at least three different data categories (e.g., users, posts, or comments).
 - ✅Utilize reasonable data structuring practices.
@@ -192,7 +192,11 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 
 - What could you have done differently during the planning stages of your project to make the execution easier?
 
-- Were there any requirements that were difficult to implement? What do you think would make them easier to implement in future projects?
+    - I was manually checking in each admin method if the req.query.role is admin. I thought of adding middleware for the same at the end. If I had thought of it earlier, I could have save a lot of repeat code.
+
+- what would you add or change about your application if you had more time?
+
+    - I would add book checkout functionality for users on the books page if I had more time.
 
 
 

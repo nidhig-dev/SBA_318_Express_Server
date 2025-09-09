@@ -33,7 +33,6 @@ router.route("/")
             }
             //if user is a regular user, redirect to books page
             else{
-                console.log("I am a user",user.name);
                return res.redirect(`/books/user?name=${user.name}&role=${user.role}`);
             }
         } 
