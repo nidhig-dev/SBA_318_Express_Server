@@ -7,28 +7,39 @@ const router = express.Router();
 
 router.route("/")
 
-    //@route GET(/borrow)
+    //@route GET(/admin/borrow)
     //@desc-gets user and books' loan history.
     //@access:admin
+    //@Note: This method expects query parameter role:admin to access this route
+
     .get((req, res, next) => {
         let role = req.query["role"];
-        if (role == 'admin') {
+        // if (role == 'admin') {
             return res.json(borrowBook);
-        }
-        else {
-            //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-        }
+        // }
+        // else {
+        //     //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        // }
 
     })
-    //@route POST(/borrow)
+    //@route POST(/admin/borrow)
     //@desc-create laon entry when user checks out a book
     //@access:admin
+    //@Note: This method expects query parameter role:admin to access this route
+//Sample data: {
+// "userId": 2,
+// "bookId": 7,
+// "borrowDate": "2025-08-25",
+// "dueDate": "2025-09-09",
+// "returnDate": null
+// }
+
     .post((req, res, next) => {
         let role = req.query["role"];
-        if (role == "admin") {
+        // if (role == "admin") {
             const { userId, bookId, borrowDate, dueDate, returnDate } = req.body;
 
             if (borrowBook.find((loan) => (userId == loan.userId) && (bookId == loan.bookId))) {
@@ -49,26 +60,27 @@ router.route("/")
                 return res.json(borrowBook);
 
             }
-        }
-        else {
-            //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-        }
+        // }
+        // else {
+        //     //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        // }
 
     });
 
 router.route("/userid/:id")
-    //@route GET(/borrow/userid/:id)
+    //@route GET(/admin/borrow/userid/:id)
     //id= userid
     //@desc-gets all the loan history of a user
     //@access:admin
+    //@Note: This method expects query parameter role:admin to access this route
 
     .get((req, res, next) => {
         const userId = req.params.id;
         let role = req.query["role"];
-        if (role == 'admin') {
+        // if (role == 'admin') {
             let loanArr = borrowBook.filter((loan) => loan.userId == userId);
             if (loanArr.length > 0) {
                 res.json(loanArr);
@@ -78,27 +90,27 @@ router.route("/userid/:id")
                 err.status = 404;
                 next(err);
             }
-        }
-        else {
-            //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-        }
+        // }
+        // else {
+        //     //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        // }
     });
 
 
 router.route("/bookid/:id")
-    //@route GET(/borrow/bookid/:id)
+    //@route GET(/admin/borrow/bookid/:id)
     //id= bookid
     //@desc-gets all the loan history of a book
     //@access:admin
-
+    //@Note: This method expects query parameter role:admin to access this route
 
     .get((req, res, next) => {
         const bookId = req.params.id;
         let role = req.query["role"];
-        if (role == 'admin') {
+        // if (role == 'admin') {
 
             let loanArr = borrowBook.filter((loan) => loan.bookId == bookId);
             if (loanArr.length > 0) {
@@ -109,28 +121,29 @@ router.route("/bookid/:id")
                 err.status = 404;
                 next(err);
             }
-        }
-        else {
-            //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-        }
+        // }
+        // else {
+        //     //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        // }
 
     });
 
 
 router.route("/:id")
 
-    //@route PATCH(/borrow/:id)
+    //@route PATCH(/admin/borrow/:id)
     //id= loan id
     //@desc-Update loan entry based on loan id
     //@access:admin
+    //@Note: This method expects query parameter role:admin to access this route
 
     .patch((req, res, next) => {
         const id = req.params.id
         let role = req.query["role"];
-        if (role == 'admin') {
+        // if (role == 'admin') {
             console.log(req.body);
             let { userId, bookId, borrowDate, dueDate, returnDate } = req.body;
             if (userId && bookId && borrowDate && dueDate) {
@@ -167,24 +180,25 @@ router.route("/:id")
                 err.status = 422;
                 next(err);
             }
-        }
-        else {
-            //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-        }
+        // }
+        // else {
+        //     //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        // }
     })
 
-    //@route DELETE(/borrow/:id)
+    //@route DELETE(/admin/borrow/:id)
     //id= loan id
     //@desc-Delete loan entry based on loan id
     //@access:admin
+    //@Note: This method expects query parameter role:admin to access this route
 
     .delete((req, res, next) => {
         const id = req.params.id
         let role = req.query["role"];
-        if (role == 'admin') {
+        // if (role == 'admin') {
             //chk if entry exists
             let index = borrowBook.findIndex((loan) => loan.loanId == id)
             console.log(index);
@@ -197,13 +211,13 @@ router.route("/:id")
                 err.status = 404;
                 next(err);
             }
-        }
-        else {
-            //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-        }
+        // }
+        // else {
+        //     //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        // }
     })
 
 export default router;

@@ -17,20 +17,20 @@ router.route("/")
         let name = req.query["name"];
         let role = req.query["role"];
 
-        if (role == "admin") {
+        //if (role == "admin") {
             if (name) {
                 return res.render("books", { name: name, role: role, books });
             }
             else {
                 return res.render("books", { name: null, role: role, books });
             }
-        }
-        else {
-            //When url is typed without query parameter 'role' or role is not 'admin' passed to it through thunderclient/postman
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-            }        
+        // }
+        // else {
+        //     //When url is typed without query parameter 'role' or role is not 'admin' passed to it through thunderclient/postman
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        //     }        
     })
 
     //@route POST(/books/admin)
@@ -49,8 +49,10 @@ router.route("/")
     // }
 
     .post((req, res, next) => {
+        console.log("hello")
         const { name, role, title, releaseDate, description, pages, cover } = req.body;
-        if (role == "admin") {
+        console.log("I am here",role);
+        //  if (role == "admin") {
             //chk if all the data is entered by the admin
             if (title && releaseDate && description && pages && cover) {
                 //chk if title exists
@@ -74,12 +76,12 @@ router.route("/")
                 else {
                     return res.render("books", { name: null, role: role, books });
                 }
-            }
-            else {
-                const err = new Error("Insufficient Book Data");
-                err.status = 422;
-                next(err);
-            }
+            // }
+            // else {
+            //     const err = new Error("Insufficient Book Data");
+            //     err.status = 422;
+            //     next(err);
+            // }
         }
         else {
             //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
@@ -103,7 +105,7 @@ router.route("/:id")
         const { title, releaseDate, description, pages, cover } = req.body;
         //chk if all the data is entered by the admin
         // Assumption:id is a unique identifier, is sequentially generated in post method,hence can't be edited to preserve the sequence.
-        if (role == "admin") {
+        // if (role == "admin") {
             if (title && releaseDate && description && pages && cover) {
                 let index = books.findIndex((book) => book.number == id)
                 //check if book id exists
@@ -125,12 +127,12 @@ router.route("/:id")
                     err.status = 404;
                     next(err);
                 }
-            }
-            else {
-                const err = new Error("Insufficient Book Data");
-                err.status = 422;
-                next(err);
-            }
+            // }
+            // else {
+            //     const err = new Error("Insufficient Book Data");
+            //     err.status = 422;
+            //     next(err);
+            // }
         }
         else {
             const err = new Error("Permission Denied");
@@ -148,7 +150,7 @@ router.route("/:id")
     .delete((req, res, next) => {
         let id = req.params.id;
         let role = req.query["role"];
-        if (role == "admin") {
+        // if (role == "admin") {
             //check i the book to be deleted by the admin, exists in database
             let index = books.findIndex((book) => book.number == id)
             //if book exists
@@ -161,12 +163,12 @@ router.route("/:id")
                 err.status = 404;
                 next(err);
             }
-        }
-        else {
-            const err = new Error("Permission Denied");
-            err.status = 403;
-            next(err);
-        }
+        // }
+        // else {
+        //     const err = new Error("Permission Denied");
+        //     err.status = 403;
+        //     next(err);
+        // }
     });
 
 
