@@ -1,5 +1,4 @@
 import express from "express";
-
 import { books } from "../data/books.mjs"
 //env set up
 const router = express.Router();
@@ -16,21 +15,12 @@ router.route("/")
         //get the query parameter either from thunderclient/postman or from userRoute.mjs for admin validation
         let name = req.query["name"];
         let role = req.query["role"];
-
-        //if (role == "admin") {
-            if (name) {
-                return res.render("books", { name: name, role: role, books });
-            }
-            else {
-                return res.render("books", { name: null, role: role, books });
-            }
-        // }
-        // else {
-        //     //When url is typed without query parameter 'role' or role is not 'admin' passed to it through thunderclient/postman
-        //     const err = new Error("Permission Denied");
-        //     err.status = 403;
-        //     next(err);
-        //     }        
+        if (name) {
+            return res.render("books", { name: name, role: role, books });
+        }
+        else {
+            return res.render("books", { name: null, role: role, books });
+        }
     })
 
     //@route POST(/books/admin)
@@ -50,35 +40,28 @@ router.route("/")
 
     .post((req, res, next) => {
         const { name, role, title, releaseDate, description, pages, cover } = req.body;
-        //  if (role == "admin") {
-            //chk if all the data is entered by the admin
-            if (title && releaseDate && description && pages && cover) {
-                //chk if title exists
-                if (books.find((book) => book.title.toLowerCase() == title.toLowerCase())) {
-                    res.status(409).json({ msg: "This Book already exists in the database." })
-                    return;
-                }
-                let book = {
-                    number: books.length + 1,
-                    title,
-                    releaseDate,
-                    description,
-                    pages,
-                    cover
-                }
-                books.push(book);
-                if (name) {
-                    return res.render("books", { name: name, role: role, books });
-                }
-                else {
-                    return res.render("books", { name: null, role: role, books });
-                }
-            // }
-            // else {
-            //     const err = new Error("Insufficient Book Data");
-            //     err.status = 422;
-            //     next(err);
-            // }
+        //chk if all the data is entered by the admin
+        if (title && releaseDate && description && pages && cover) {
+            //chk if title exists
+            if (books.find((book) => book.title.toLowerCase() == title.toLowerCase())) {
+                res.status(409).json({ msg: "This Book already exists in the database." })
+                return;
+            }
+            let book = {
+                number: books.length + 1,
+                title,
+                releaseDate,
+                description,
+                pages,
+                cover
+            }
+            books.push(book);
+            if (name) {
+                return res.render("books", { name: name, role: role, books });
+            }
+            else {
+                return res.render("books", { name: null, role: role, books });
+            }
         }
         else {
             //When url is typed without req.body containing 'role' property or role property is not 'admin' passed to it through thunderclient/postman
@@ -102,34 +85,27 @@ router.route("/:id")
         const { title, releaseDate, description, pages, cover } = req.body;
         //chk if all the data is entered by the admin
         // Assumption:id is a unique identifier, is sequentially generated in post method,hence can't be edited to preserve the sequence.
-        // if (role == "admin") {
-            if (title && releaseDate && description && pages && cover) {
-                let index = books.findIndex((book) => book.number == id)
-                //check if book id exists
-                if (index != -1) {
-                    let book = {
-                        //keeping id same as before
-                        number: id,
-                        title,
-                        releaseDate,
-                        description,
-                        pages,
-                        cover
-                    }
-                    books.splice(index, 1, book);
-                    return res.json(books);
+        if (title && releaseDate && description && pages && cover) {
+            let index = books.findIndex((book) => book.number == id)
+            //check if book id exists
+            if (index != -1) {
+                let book = {
+                    //keeping id same as before
+                    number: id,
+                    title,
+                    releaseDate,
+                    description,
+                    pages,
+                    cover
                 }
-                else {
-                    const err = new Error("Book entry not found!");
-                    err.status = 404;
-                    next(err);
-                }
-            // }
-            // else {
-            //     const err = new Error("Insufficient Book Data");
-            //     err.status = 422;
-            //     next(err);
-            // }
+                books.splice(index, 1, book);
+                return res.json(books);
+            }
+            else {
+                const err = new Error("Book entry not found!");
+                err.status = 404;
+                next(err);
+            }
         }
         else {
             const err = new Error("Permission Denied");
@@ -147,25 +123,18 @@ router.route("/:id")
     .delete((req, res, next) => {
         let id = req.params.id;
         let role = req.query["role"];
-        // if (role == "admin") {
-            //check i the book to be deleted by the admin, exists in database
-            let index = books.findIndex((book) => book.number == id)
-            //if book exists
-            if (index != -1) {
-                books.splice(index, 1);
-                return res.json(books);
-            }
-            else {
-                const err = new Error("Book entry not found!");
-                err.status = 404;
-                next(err);
-            }
-        // }
-        // else {
-        //     const err = new Error("Permission Denied");
-        //     err.status = 403;
-        //     next(err);
-        // }
+        //check i the book to be deleted by the admin, exists in database
+        let index = books.findIndex((book) => book.number == id)
+        //if book exists
+        if (index != -1) {
+            books.splice(index, 1);
+            return res.json(books);
+        }
+        else {
+            const err = new Error("Book entry not found!");
+            err.status = 404;
+            next(err);
+        }      
     });
 
 
