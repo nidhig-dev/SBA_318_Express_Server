@@ -32,7 +32,7 @@
                 <input type="text" name="title" class="libNumText" />
             </label>
             <label>Release Date
-                <input type="text" name="releaseDate" placeholder="Jun 26, 1997" class="libNumText" />
+                <input type="text" name="releaseDate" placeholder="Format: Jun 26, 1997" class="libNumText" />
             </label>
             <label>Description
                 <input type="text" name="description" class="libNumText" />
@@ -41,21 +41,10 @@
                 <input type="text" name="pages" class="libNumText" />
             </label>
             <label>Cover
-                <input type="text" name="cover" class="libNumText" />
+                <input type="text" name="cover" placeholder="https://" class="libNumText" />
             </label>
             <input type="submit" name="addBook" class="adminBtn" value="Add a book" />
-        </form>
-        <!-- <form  class="postBook" action="/books/admin" method="GET"></form>
-        <input type="hidden" name="name" value="<%=name%>">
-        <input type="hidden" name="role" value="<%=role%>">
-        <label> Title
-            <input type="text" name="title" class="libNumText" />
-        </label>
-            <input type="submit" name="delBook" class="adminBtn" value="Delete a book" />
-        </form>
-        <form  action="/" method="GET"></form>
-            <input type="submit" name="updateBook" class="adminBtn" value="Update a book" />
-        </form> -->
+        </form>        
     </div>
 </body>
 

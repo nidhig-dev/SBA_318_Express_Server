@@ -39,12 +39,33 @@ router.route("/")
     // }
 
     .post((req, res, next) => {
-        const { name, role, title, releaseDate, description, pages, cover } = req.body;
+        let { name, role, title, releaseDate, description, pages, cover } = req.body;
         //chk if all the data is entered by the admin
         if (title && releaseDate && description && pages && cover) {
             //chk if title exists
             if (books.find((book) => book.title.toLowerCase() == title.toLowerCase())) {
                 res.status(409).json({ msg: "This Book already exists in the database." })
+                return;
+            }
+            if (isNaN(pages) || pages == 0) {
+                res.status(422).json({ msg: "Pages can only be number greater than zero." });
+                return;
+            }
+            //Jun 19,1997 format
+            const regex = /^[A-Za-z]{3} \d{1,2},\d{4}\s*$/;
+            if (!regex.test(releaseDate)) {
+                res.status(422).json({ msg: "Please enter Release date in this format: Jun 19,1997" });
+                return;
+            };
+            let parts = releaseDate.split(" ");
+            let month = parts[0];
+            let otherDate = parts[1];
+            month = month[0].toUpperCase() + month[1].toLowerCase() + month[2].toLowerCase();
+            releaseDate = month + " " + otherDate;
+            //checking http or https in image url with valid extension
+            const reg = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|bmp|svg)(\?.*)?$/i;
+            if(!reg.test(cover)){
+                res.status(422).json({ msg: "Invalid cover image address" });
                 return;
             }
             let book = {
@@ -134,7 +155,7 @@ router.route("/:id")
             const err = new Error("Book entry not found!");
             err.status = 404;
             next(err);
-        }      
+        }
     });
 
 

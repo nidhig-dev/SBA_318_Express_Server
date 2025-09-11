@@ -80,8 +80,13 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
     - This page gives you access to see book inventory. The admin will also see **bookId** of a book.
     - Add/Create a new book entry using post method.
     #### Validation for post method: 
-    - If book title (case insensitive)matches exactly with entered title, it will throw error.
+    - If book title matches exactly with entered title, it will throw error. Book title validation is case insensitive. It will ignore Uppercase/LowerCase.
     - If any field is empty, it will throw error.
+    - Pages need to be an integer. Else error will be thrown.
+    - Release date needs to be in format "Jun 19,2005". 
+        - Month needs to be **3 letters** followed by **space** followed by **1 or 2 digit** followed by **comma** followed by **4 digits**.
+    - Cover page image format is http or https and valid extension.
+
 
  - Sample data of book entry:
 
@@ -192,7 +197,7 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 
 - What could you have done differently during the planning stages of your project to make the execution easier?
 
-    - I was manually checking in each admin method if the req.query.role is admin. I thought of adding middleware for the same at the end. If I had thought of it earlier, I could have save a lot of repeat code.
+    - I was manually checking in each admin method if the req.query.role is admin. I thought of adding middleware for the same at the end. If I had thought of it earlier, I could have save a lot of repeat code and time.
 
 - what would you add or change about your application if you had more time?
 
