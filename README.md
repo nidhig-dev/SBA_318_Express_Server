@@ -197,7 +197,7 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 
 - What could you have done differently during the planning stages of your project to make the execution easier?
 
-    - I was manually checking in each admin method if the req.query.role is admin. I thought of adding middleware for the same at the end. If I had thought of it earlier, I could have save a lot of repeat code and time.
+    - I was manually checking in each admin method if the req.query.role is admin. I thought of adding middleware for the same at the end. If I had thought of it earlier, I could have saved a lot of time.
 
 - what would you add or change about your application if you had more time?
 
