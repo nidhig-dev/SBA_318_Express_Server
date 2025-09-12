@@ -7,20 +7,29 @@ router.route("/")
     //@route GET(/books/admin)
     //@desc-gets book inventory in library 
     //@access:admin
+
     //@Note: If entering data through thunderclient or postman, this method expects query parameter 'role:admin' to access this route
-    //@Note: optional: If you enter query parameter 'name:any name', then template view shows your name
+    //@Note: optional: If you enter query parameter 'name:any user name', then template view shows your name
 
 
     .get((req, res, next) => {
         //get the query parameter either from thunderclient/postman or from userRoute.mjs for admin validation
         let name = req.query["name"];
         let role = req.query["role"];
-        if (name) {
+
+        if (name && role) {
             return res.render("books", { name: name, role: role, books });
         }
-        else {
+        else if (name) {
+            return res.render("books", { name: name, role: null, books });
+        }
+        else if (role) {
             return res.render("books", { name: null, role: role, books });
         }
+        else {
+            //When url is typed without query parameters 'name' and 'role' passed to it through thunderclient/postman
+            return res.render("books", { name: null, role: null, books });
+        }        
     })
 
     //@route POST(/books/admin)
@@ -32,7 +41,7 @@ router.route("/")
     // {
     // "role": "admin",
     // "title": "The Class",
-    // "releaseDate": "Jan 1, 1986",
+    // "releaseDate": "Jan 1,1986",
     // "description": "A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.",
     // "pages": 560,
     // "cover": "https://m.media-amazon.com/images/I/51rIay3vijL.jpg"

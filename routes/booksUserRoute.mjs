@@ -37,12 +37,13 @@ router.route("/id/:id")
 
     .get((req, res, next) => {
         const number = req.params.id;
+
         let book = books.find((book) => book.number == number);
         if (book) {
             res.json(book);
 
         } else {
-            const err = new Error("No Book found!");
+            const err = new Error("Incorrect Book Id.No Book found!");
             err.status = 404;
             next(err);
         }
@@ -62,7 +63,7 @@ router.route("/name/:name")
         if (newBookArr.length > 0) {
             res.json(newBookArr);
         } else {
-            const err = new Error("No Book found!");
+            const err = new Error("Incorrect Book Id. No Book found!");
             err.status = 404;
             next(err);
         }

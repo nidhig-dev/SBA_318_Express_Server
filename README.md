@@ -5,7 +5,6 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 
 ## 📚 Library API Endpoints
 
-
 **Public/User Route**
 | Method | Route                      | Description                         | Required route parameter    |
 | ------ | -------------------------- | ---------------------------------   |---------------------------- |
@@ -30,6 +29,15 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 | DELETE | `/admin/borrow/:id`        | Delete loan record           | req.query parameter role:admin                        |
 
 ---
+## 🛠️ Tools & Technologies Used
+
+- **Node.js** – JavaScript runtime.
+- **Express.js** – Web application framework.
+- **EJS** – Template engine for dynamic HTML.
+- **Morgan** – HTTP request logger middleware.
+- **nodemon** – Automatically restarts the server during development.
+- **Thunder Client/Postman** – API testing and development tool.
+------
 
 ## How to Test
 
@@ -47,7 +55,7 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
     `{
      "role": "admin",
      "title": "The Class",
-     "releaseDate": "Jan 1, 1986",
+     "releaseDate": "Jan 1,1986",
      "description": "A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.",
      "pages": 560,
      "cover": "https://m.media-amazon.com/images/I/51rIay3vijL.jpg"
@@ -57,12 +65,11 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
 
     - Query parameter: role:admin
 
-    Sample Data-
-
-     `{
+    Sample Data-    
+    `{
      "role": "admin",
      "title": "The Class",
-     "releaseDate": "Jan 1, 1986",
+     "releaseDate": "Jan 1,1986",
      "description": "A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.",
      "pages": 560,
      "cover": "https://m.media-amazon.com/images/I/51rIay3vijL.jpg"
@@ -91,7 +98,7 @@ It uses **EJS view engine** for rendering pages and supports both **admin** and 
  - Sample data of book entry:
 
     * Title- `The Class`
-    * Release Date- `Jan 1, 1986`
+    * Release Date- `Jan 1,1986`
     * Description- `A powerful and moving saga of five extraordinary members of the Harvard class of 1958 and the women with whom their lives are intertwined. Their explosive story begins in a time of innocence and spans a turbulent quarter century, culminating in their dramatic twenty-five reunion at which they confront their classmates--and the balance sheet of their own lives. Always at the center; amid the passion, laughter, and glory, stands Harvard--the symbol of who they are and who they will be. They were a generation who made the rules--then broke them--whose glittering successes, heartfelt tragedies, and unbridled ambitions would stun the world.`
     * Pages- `560`,
     * Cover-`https://m.media-amazon.com/images/I/51rIay3vijL.jpg`
